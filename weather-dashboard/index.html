@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="SkyCast — a modern glassmorphic weather dashboard with live conditions, 5-day forecasts and dynamic visuals."
+    />
+    <title>SkyCast · Weather Dashboard</title>
+
+    <!-- Inter font (self-hosted via Google Fonts CDN with display=swap for performance) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!--
+      Prevent theme "flash of incorrect colors": read the persisted theme
+      before React hydrates and set the `dark` class immediately.
+    -->
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem('skycast:theme');
+          if (!t) {
+            t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+          }
+          document.documentElement.classList.toggle('dark', t === 'dark');
+        } catch (e) {
+          /* localStorage unavailable (private mode) – keep default */
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
