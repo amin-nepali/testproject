@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ───────────────────────── Base ───────────────────────── */
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply font-sans min-h-screen bg-slate-100 text-slate-800 transition-colors duration-500 dark:bg-slate-950 dark:text-slate-100;
+  }
+
+  /* Respect users who prefer reduced motion. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* Slim, themed scrollbars */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-slate-400/40;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
+/* ─────────────────────── Components ─────────────────────── */
+@layer components {
+  /* Frosted-glass panel used across the whole dashboard. */
+  .glass-card {
+    @apply rounded-3xl border backdrop-blur-xl transition-colors duration-500;
+    @apply border-white/60 bg-white/60 shadow-glass;
+    @apply dark:border-white/10 dark:bg-slate-900/50;
+  }
+
+  .glass-card-hover {
+    @apply hover:-translate-y-0.5 hover:bg-white/75 hover:shadow-glass-sm transition-all duration-300 dark:hover:bg-slate-900/70;
+  }
+
+  /* Small uppercase label used above metric values. */
+  .metric-label {
+    @apply text-[11px] font-semibold uppercase tracking-widest text-slate-500 dark:text-slate-400;
+  }
+
+  .metric-value {
+    @apply mt-1 text-lg font-bold text-slate-800 dark:text-slate-100;
+  }
+
+  /* Skeleton block with an animated shimmer sweep. */
+  .skeleton {
+    @apply relative overflow-hidden rounded-2xl bg-slate-200/70 dark:bg-slate-800/70;
+  }
+  .skeleton::after {
+    content: '';
+    @apply absolute inset-0 animate-shimmer;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.35) 50%,
+      transparent 100%
+    );
+    background-size: 500px 100%;
+  }
+}
+
+/* ─────────────────────── Utilities ─────────────────────── */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
